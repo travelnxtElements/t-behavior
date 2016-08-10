@@ -1,6 +1,6 @@
 # \<t-behavior\>
 
-This is the page behavior for all page components.
+This repo contains all the behaviors used across all travelnxt elements.
 
 ## Install the Polymer-CLI
 
