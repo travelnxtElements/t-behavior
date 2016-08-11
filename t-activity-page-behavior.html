@@ -38,6 +38,20 @@
                 },
 
                 /*
+                 * <p>This property holds the value of selected date of selected option</p>
+                 */
+                selectedOption: {
+                    type: String
+                },
+
+                /*
+                 * <p>This property holds the value of selected date of selected option</p>
+                 */
+                selectedDate: {
+                    type: String
+                },
+
+                /*
                  * <p>This property holds the value of passenger count selected against the selected option</p>
                  */
                 paxCount: {
@@ -52,6 +66,40 @@
                     notify: true
                 }
             },
+
+            _setSelectedOption: function () {
+
+                if (!this.itinerary || !this.itinerary.options || !this.itinerary.options.length) {
+                    return;
+                }
+
+                this.selectedOption = this.itinerary.options.find(function (item) {
+                    return item.id.toLowerCase() === this.optionId.toLowerCase();
+                }, this);
+                
+            },
+
+            /*
+             * <p>Sets the `paxCountMap` property with passengers counts present in selected option</p>
+            */
+            _setPaxDetails: function () {
+
+                this.paxCountMap = [];
+
+                this._setSelectedOption();
+
+                if (!this.selectedOption || !this.selectedOption.passengerTypesInfo) {
+                    return;
+                }
+
+                for (var i = 0; i < this.selectedOption.passengerTypesInfo.length; i++) {
+                    var passenger = this.selectedOption.passengerTypesInfo[i];
+                    this.paxCountMap.push({
+                        type: passenger.passengerType,
+                        count: passenger.quantity
+                    });
+                }
+            }
         };
     })(window);
 
