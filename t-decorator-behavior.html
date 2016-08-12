@@ -1,0 +1,46 @@
+/**
+ * `decorator behavior` provides the common properties and observer functions used across all the `decorator components`
+ * @polymerBehavior DecoratorBehavior
+ */
+<script>
+
+    (function(window, undefined) {
+
+        'use strict'
+
+        window.TravelNxt = window.TravelNxt || {};
+        window.TravelNxt.Behaviors = window.TravelNxt.Behaviors || {};
+        window.TravelNxt.Behaviors.DecoratorBehavior = {
+
+            properties: {
+
+                /**
+                 * This is the object which will be translated
+                 * It is an observer which triggers `__decorate` method on change
+                 */
+            	input : {
+            		type: Object,
+            		observer: '__decorate'
+            	},
+
+                /**
+                 * This property is set once `__decorate` method gets called.
+                 * listen to `on-output-changed` event to get notified with the change in this property
+                 */
+            	output: {
+            		type: Object,
+            		notify: true
+            	}
+            },
+
+            /**
+             * This is the default observer function for `input` property.
+             * Decorator components can override it to add custom logic in it.
+             */
+            __decorate: function () {
+            	this.output = this.input || {};
+            }
+        };
+    })(window);
+
+</script>
