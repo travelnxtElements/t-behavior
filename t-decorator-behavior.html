@@ -29,7 +29,8 @@
                  */
             	output: {
             		type: Object,
-            		notify: true
+            		notify: true,
+                    readOnly: true
             	}
             },
 
@@ -38,7 +39,7 @@
              * Decorator components can override it to add custom logic in it.
              */
             __decorate: function () {
-            	this.output = this.input || {};
+            	this._setOutput(this.input || {});
             }
         };
     })(window);
