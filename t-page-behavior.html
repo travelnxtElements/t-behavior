@@ -16,8 +16,8 @@
             properties: {
 
                 /*
-                 * <p>This is a notification flag to indicate current page state</p>
-                 * <p>Set it to true if page needs to be displayed on browser</p>
+                 * This is a notification flag to indicate current page state
+                 * Set it to true if page needs to be displayed on browser
                  */
                 visible: {
                     type: Boolean,
@@ -27,17 +27,18 @@
                 },
 
                 /*
-                 * <p>This is a notification flag to indicate current page state</p>
-                 * <p>Set it to true if page needs to be displayed on browser</p>
+                 * This is observer property for page component
+                 * It is a key value pair collection used to trigger page load methods in page components
+                 * It is set by constructor components of respective page components
                  */
-                constructor: {
+                _constructor: {
                     type: Object,
                     notify: true
                 },
 
                 /*
-                 * <p>This flag is et to true whenever server side call is made</p>
-                 * <p>Bind it with `loading` property of `provider behavior`</p>
+                 * This flag is et to true whenever server side call is made
+                 * Bind it with `loading` property of `provider behavior`
                  */
                 loading: {
                     type: Boolean,
@@ -45,21 +46,21 @@
                 },
 
                 /*
-                 * <p>This string is query string containing token value</p>
+                 * This string is query string containing token value
                  */
                 authToken: {
                     type: String
                 },
 
                 /*
-                 * <p>This property holds the value of api base URL</p>
+                 * This property holds the value of api base URL
                  */
                 apiBaseUrl: {
                     type: String
                 },
 
                 /*
-                 * <p>This property holds the value of web api URL format</p>
+                 * This property holds the value of web api URL format
                  */
                 apiUrlFormat: {
                     type: String
@@ -74,42 +75,42 @@
                 },
 
                 /*
-                 * <p>This property holds value of search id generated after search call</p>
+                 * This property holds value of search id generated after search call
                 */
                 searchId: {
                     type: String
                 },
 
                 /*
-                 * <p>This property holds the value of search criteria</p>
+                 * This property holds the value of search criteria
                  */
                 searchCriteria: {
                     type: Object
                 },
 
                 /*
-                 * <p>This property holds the value of selected itinerary</p>
+                 * This property holds the value of selected itinerary
                  */
                 itinerary: {
                     type: Object
                 },
 
                 /*
-                 * <p>This property holds the value of selected itinerary id</p>
+                 * This property holds the value of selected itinerary id
                  */
                 itineraryId: {
                     type: String
                 },
 
                 /*
-                 * <p>This property holds the value of passenger info</p>
+                 * This property holds the value of passenger info
                  */
                 passengerInfo: {
                     type: Object
                 },
 
                 /*
-                 * <p>This property holds the value of booked itinerary</p>
+                 * This property holds the value of booked itinerary
                  */
                 bookedItinerary: {
                     type: Object
