@@ -22,6 +22,16 @@
                 visible: {
                     type: Boolean,
                     value: false,
+                    notify: true,
+                    reflectToAttribute: true
+                },
+
+                /*
+                 * <p>This is a notification flag to indicate current page state</p>
+                 * <p>Set it to true if page needs to be displayed on browser</p>
+                 */
+                constructor: {
+                    type: Object,
                     notify: true
                 },
 
