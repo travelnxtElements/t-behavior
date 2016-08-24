@@ -115,6 +115,40 @@
                     value: 'arrow-back'
                 }
             },
+
+            _isConstructorChanged : function () {
+
+                //check if constructorObj is primitive
+                if (this._isPrimitiveConstructor()) {
+                    return this.constructorObj !== this._constructorObj;
+                }
+
+                if (!this.constructorObj) {
+                    return false;
+                }
+
+                if (!this._constructorObj) {
+                    return true;
+                }
+
+                var keys = Object.keys(this.constructorObj);
+
+                if (!keys || !keys.length) {
+                    return false;
+                }
+
+                var isChanged = false;
+
+                for (var i = 0; i < keys.length; i++) {
+                    isChanged = this._constructorObj[keys[i]] !== this.constructorObj[keys[i]] || isChanged;
+                }
+
+                return isChanged;
+            },
+
+            _isPrimitiveConstructor: function () {
+                return typeof this.constructorObj === 'string' || typeof this.constructorObj === 'number' || typeof this.constructorObj === 'boolean';
+            }
         };
     })(window);
 
