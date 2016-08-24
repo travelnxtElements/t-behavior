@@ -24,6 +24,14 @@
             	},
 
                 /**
+                 * Private copy of input to fire decoration
+                 */
+                _input : {
+                    type: Object,
+                    readOnly: true
+                },
+
+                /**
                  * This property is set once `__decorate` method gets called.
                  * listen to `on-output-changed` event to get notified with the change in this property
                  */
@@ -40,6 +48,40 @@
              */
             __decorate: function () {
             	this._setOutput(this.input || {});
+            },
+
+            _isInputChanged : function () {
+
+                //check if input is primitive
+                if (this._isPrimitiveInput()) {
+                    return this.input !== this._input;
+                }
+
+                if (!this.input) {
+                    return false;
+                }
+
+                if (!this._input) {
+                    return true;
+                }
+
+                var keys = Object.keys(this.input);
+
+                if (!keys || !keys.length) {
+                    return false;
+                }
+
+                var isChanged = false;
+
+                for (var i = 0; i < keys.length; i++) {
+                    isChanged = this._input[keys[i]] !== this.input[keys[i]] || isChanged;
+                }
+
+                return isChanged;
+            },
+
+            _isPrimitiveInput: function () {
+                return typeof this.input === 'string' || typeof this.input === 'number' || typeof this.input === 'boolean';
             }
         };
     })(window);
