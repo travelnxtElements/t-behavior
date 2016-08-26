@@ -23,7 +23,7 @@
         TravelNxt.Behaviors.SessionBehavior = {
 
             properties: {
-                
+
                 _data: {
                     type: Array
                 },
@@ -66,6 +66,18 @@
                 //all data items are fetched
                 if (this._dataCount >= this._data.length) {
                     this._onComplete();
+                    return;
+                }
+
+                if (this[this._data[this._dataCount].propertyName]) {
+
+                    //update data count
+                    this._set_dataCount(this._dataCount + 1);
+
+                    //get next data element
+                    this._getSession();
+
+                    return;
                 }
 
                 //assign key to storage component
@@ -80,6 +92,7 @@
                 //all data items are saved
                 if (this._dataCount >= this._data.length) {
                     this._onComplete();
+                    return;
                 }
 
                 //assign key to storage component
@@ -151,7 +164,7 @@
             },
 
             _onError: function () {
-                this.fire('session-sync-complete');
+                this.fire('go-to-search');
             }
         };
     })();
