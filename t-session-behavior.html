@@ -21,7 +21,9 @@
         TravelNxt = window.TravelNxt || {};
         TravelNxt.Behaviors = TravelNxt.Behaviors || {};
         TravelNxt.Behaviors.SessionBehavior = {
+
             properties: {
+                
                 _data: {
                     type: Array
                 },
@@ -37,29 +39,33 @@
                 }
             },
 
-            get: function() {
+            getSession: function() {
                 if (!this._data || !this._data.length) {
+                    this._onError();
                     console.warn("no session keys are provided by component - " + this.nodeName.toLowerCase());
                 }
 
                 this._set_dataCount(0);
 
-                this._get();
+                this._getSession();
             },
 
-            set: function () {
+            setSession: function () {
                 if (!this._data || !this._data.length) {
+                    this._onError();
                     console.warn("no session keys are provided by component - " + this.nodeName.toLowerCase());
                 }
 
                 this._set_dataCount(0);
 
-                this._set();
+                this._setSession();
             },
 
-            _get: function () {
+            _getSession: function () {
+
+                //all data items are fetched
                 if (this._dataCount >= this._data.length) {
-                    return;
+                    this._onComplete();
                 }
 
                 //assign key to storage component
@@ -69,9 +75,11 @@
                 this.$[this._storeId].load();
             },
 
-            _set: function () {
+            _setSession: function () {
+
+                //all data items are saved
                 if (this._dataCount >= this._data.length) {
-                    return;
+                    this._onComplete();
                 }
 
                 //assign key to storage component
@@ -87,12 +95,14 @@
             _onSessionGet: function(e) {
 
                 if (!this.$[this._storeId].value) {
+                    this._onError();
                     console.warn("Session value for key " + this.$[this._storeId].key + " in " + this.nodeName.toLowerCase() + " component not found!");
                 }
 
                 var loadedSessionKey = this._data[this._dataCount];
 
                 if (!loadedSessionKey || !loadedSessionKey.propertyName) {
+                    this._onError();
                     console.warn("Property name to restore session value not found!");
                 }
 
@@ -107,12 +117,13 @@
                 this._set_dataCount(this._dataCount + 1);
 
                 //get next data element
-                this._get();
+                this._getSession();
             },
 
             _onSessionSave: function() {
 
                 if (this._data[this._dataCount].value !== this.$[this._storeId].value) {
+                    this._onError();
                     console.warn("Failed to save " + this.$[this._storeId].key + " for " + this.nodeName.toLowerCase() + " component!");
                 }
 
@@ -120,6 +131,7 @@
 
                 if (!loadedSessionKey || !loadedSessionKey.propertyName) {
                     var prop = loadedSessionKey && loadedSessionKey.propertyName ? loadedSessionKey.propertyName : '';
+                    this._onError();
                     console.warn("Property name '" + prop + "' to restore session value not found!");
                 }
 
@@ -131,7 +143,15 @@
                 this._set_dataCount(this._dataCount + 1);
 
                 //set next data element
-                this._set();
+                this._setSession();
+            },
+
+            _onComplete: function () {
+                this.fire('session-sync-complete');
+            },
+
+            _onError: function () {
+                this.fire('session-sync-complete');
             }
         };
     })();
