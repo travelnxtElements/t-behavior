@@ -74,6 +74,10 @@
                     return;
                 }
 
+                if (!this.optionId) {
+                    return;
+                }
+
                 this.selectedOption = this.itinerary.options.find(function (item) {
                     return item.id.toLowerCase() === this.optionId.toLowerCase();
                 }, this);
@@ -87,7 +91,9 @@
 
                 var paxCountMap = [];
 
-                this._setSelectedOption();
+                if (!this.selectedOption || !this.selectedOption.passengerTypesInfo) {
+                    this._setSelectedOption();
+                }
 
                 if (!this.selectedOption || !this.selectedOption.passengerTypesInfo) {
                     return;
