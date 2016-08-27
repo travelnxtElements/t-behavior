@@ -115,8 +115,9 @@
                 var loadedSessionKey = this._data[this._dataCount];
 
                 if (!loadedSessionKey || !loadedSessionKey.propertyName) {
+                    var prop = loadedSessionKey && loadedSessionKey.propertyName ? loadedSessionKey.propertyName : '';
                     this._onError();
-                    console.warn("Property name to restore session value not found!");
+                    console.warn("Property name '" + prop + "' to restore session value not found!");
                 }
 
                 //set the property name with session store value
@@ -140,10 +141,7 @@
                     console.warn("Failed to save " + this.$[this._storeId].key + " for " + this.nodeName.toLowerCase() + " component!");
                 }
 
-                var loadedSessionKey = this._data[this._dataCount];
-
-                if (!loadedSessionKey || !loadedSessionKey.propertyName) {
-                    var prop = loadedSessionKey && loadedSessionKey.propertyName ? loadedSessionKey.propertyName : '';
+                if (!this._data[this._dataCount]) {
                     this._onError();
                     console.warn("Property name '" + prop + "' to restore session value not found!");
                 }
