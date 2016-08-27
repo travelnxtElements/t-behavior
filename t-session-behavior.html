@@ -65,7 +65,7 @@
 
                 //all data items are fetched
                 if (this._dataCount >= this._data.length) {
-                    this._onComplete();
+                    this._onGetComplete();
                     return;
                 }
 
@@ -91,7 +91,7 @@
 
                 //all data items are saved
                 if (this._dataCount >= this._data.length) {
-                    this._onComplete();
+                    this._onSetComplete();
                     return;
                 }
 
@@ -159,8 +159,12 @@
                 this._setSession();
             },
 
-            _onComplete: function () {
-                this.fire('session-sync-complete',{}, { bubbles: false });
+            _onGetComplete: function () {
+                this.fire('session-get-complete',{}, { bubbles: false });
+            },
+
+            _onSetComplete: function () {
+                this.fire('session-set-complete',{}, { bubbles: false });
             },
 
             _onError: function () {
