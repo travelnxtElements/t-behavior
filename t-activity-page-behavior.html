@@ -101,6 +101,11 @@
 
                 for (var i = 0; i < this.selectedOption.passengerTypesInfo.length; i++) {
                     var passenger = this.selectedOption.passengerTypesInfo[i];
+
+                    if (passenger.passengerType.toLowerCase() === 'youth') {
+                        continue;
+                    }
+                    
                     paxCountMap.push({
                         type: passenger.passengerType,
                         count: passenger.quantity,
