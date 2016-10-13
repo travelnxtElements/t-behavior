@@ -83,6 +83,10 @@
                 //assign key to storage component
                 this.$[this._storeId].key = this._data[this._dataCount].key;
 
+                //reset session
+                this.$[this._storeId].value = null;
+                this.$[this._storeId].loaded = false;
+
                 //get data item
                 this.$[this._storeId].load();
             },
