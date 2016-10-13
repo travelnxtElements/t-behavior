@@ -166,6 +166,11 @@
             },
 
             _onError: function () {
+
+                //reset session
+                this.$[this._storeId].value = null;
+                this.$[this._storeId].loaded = false;
+                
                 this.fire('session-error');
             }
         };
