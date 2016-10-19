@@ -1,0 +1,65 @@
+/**
+* A comment describing this behavior...
+* @polymerBehavior FlightPageBehavior
+*/
+<script>
+
+  (function(window, undefined) {
+
+    'use strict'
+
+    window.TravelNxt = window.TravelNxt || {};
+    window.TravelNxt.Behaviors = window.TravelNxt.Behaviors || {};
+    window.TravelNxt.Behaviors.FlightPageBehavior = {
+
+      properties: {
+
+      },
+
+      _getPassengerDetails: function() {
+        if (!this.searchCriteria) {
+          return null;
+        }
+
+        var passengers = [
+        {
+          "quantity": this.searchCriteria.adult,
+          "type": "Adult",
+          "ages": []
+        },
+        {
+          "quantity": this.searchCriteria.child,
+          "type": "Child",
+          "ages": []
+        },
+        {
+          "quantity": 0,
+          "type": "Senior",
+          "ages": []
+        },
+        {
+          "quantity": this.searchCriteria.infant,
+          "type": "Infant",
+          "ages": []
+        }
+        ]
+
+        return passengers;
+      },
+
+      _getItineraryFareLabel: function() {
+        if (!this.searchCriteria) {
+          return;
+        }
+
+        if (this.searchCriteria.itineraryType === "OneWay") {
+            return "One Way Trip Fare";
+          } else if (this.searchCriteria.itineraryType === "RoundTrip") {
+            return "Round Trip Fare";
+          }
+      }
+
+    };
+  })(window);
+
+</script>
